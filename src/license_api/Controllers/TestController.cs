@@ -24,9 +24,14 @@ namespace license_api.Controllers
             return "Hello World";
         }
 
-        public string Hello (string Name) {
-            _logger.LogDebug($"Hit the Hello world route with parameter {Name}");
+        public string HelloHTML (string Name) {
+            _logger.LogDebug($"Hit the Hello World HTML route with parameter {Name}");
             return HtmlEncoder.Default.Encode($"Hello {Name}");
+        }
+
+        public JsonResult HelloJSON (string Name) {
+            _logger.LogDebug($"Hit the Hello World JSON route with parameter {Name}");
+            return new JsonResult(new {Name = Name});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
