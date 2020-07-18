@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
+using license_data;
 
 namespace license_loader
 {
