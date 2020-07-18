@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
-using license_data;
+using LicenseData;
 
 namespace license_loader
 {
@@ -11,9 +11,9 @@ namespace license_loader
         static void Main(string[] args)
         {
             var jsonString = File.ReadAllText("./data/all_licenses.json");
-            var licenses = JsonSerializer.Deserialize<List<license>>(jsonString);
+            var licenses = JsonSerializer.Deserialize<List<License>>(jsonString);
 
-            Console.WriteLine(licenses[0].conditions[0]);
+            Console.WriteLine(licenses[0].Conditions[0]);
         }
     }
 }

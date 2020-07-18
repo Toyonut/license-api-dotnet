@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\license_data\license_data.csproj" />
+    <ProjectReference Include="..\LicenseData\LicenseData.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
