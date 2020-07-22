@@ -1,8 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicenseData
 {
+    public class LicenseContext : DbContext
+    {
+        public DbSet<License> licenses { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(@"host=localhost;database=licensedata;user id=postgres; password=pass@word1");
+        }
+    }
+
     public class License 
     {
         public string ID { get; set; }
