@@ -43,7 +43,7 @@ namespace LicenseAPI.Controllers
             else 
             {
                 _logger.LogError($"Failed to call API with ID: {id}");
-                return NotFound(new {result = "not found."});
+                return NotFound(new {result = $"{id} not found."});
             }
         }
 
