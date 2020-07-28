@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using LicenseData;
 
-namespace license_loader
+namespace LicenseLoader
 {
     class Program
     {

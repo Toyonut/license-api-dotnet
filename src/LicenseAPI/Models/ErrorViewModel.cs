@@ -1,6 +1,6 @@
 using System;
 
-namespace license_api.Models
+namespace LicenseAPI.Models
 {
     public class ErrorViewModel
     {

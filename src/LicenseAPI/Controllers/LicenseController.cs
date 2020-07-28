@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using license_api.Models;
-using System.Text.Encodings.Web;
+using LicenseAPI.Models;
 using LicenseData;
 
-namespace license_api.Controllers
+namespace LicenseAPI.Controllers
 {
     public class LicenseController : Controller
     {
