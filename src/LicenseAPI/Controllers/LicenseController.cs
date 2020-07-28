@@ -23,7 +23,7 @@ namespace LicenseAPI.Controllers
             }
             else
             {
-                _logger.LogInformation($"Hit the get route on the license controller with the url parameter: {id}.");
+                _logger.LogInformation($"Hit the get route on the license controller with the ID: {id}.");
             }
 
             var licenseData = new License();
@@ -40,7 +40,8 @@ namespace LicenseAPI.Controllers
             }
             else 
             {
-                return NotFound(new {result = "error"});
+                _logger.LogError($"Failed to call API with ID: {id}");
+                return NotFound(new {result = "not found."});
             }
         }
 
