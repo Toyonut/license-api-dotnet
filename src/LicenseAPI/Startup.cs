@@ -53,7 +53,7 @@ namespace LicenseAPI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "license",
-                    pattern: "{controller=License}/{action=Find}/{id?}");
+                    pattern: "{controller=License}/{action=Get}/{id?}");
             });
         }
     }

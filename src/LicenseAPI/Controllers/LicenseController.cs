@@ -15,19 +15,33 @@ namespace LicenseAPI.Controllers
             _logger = logger;
         }
 
-        public JsonResult Find (string id) {
-            _logger.LogInformation($"Hit the find route on the license controller with the url parameter {Content(id).Content}");
-
-            var dbContext = new LicenseContext();
-
-            var licenseNames = dbContext.licenses.Select( l => l.Name ).ToList();
-
-            foreach (var item in licenseNames)
+        public ActionResult Get(string id)
+        {
+            if (string.IsNullOrEmpty(id))
             {
-                Console.WriteLine($"{item}");
+                _logger.LogInformation("Hit the get route on the license controller with no url parameter.");
+            }
+            else
+            {
+                _logger.LogInformation($"Hit the get route on the license controller with the url parameter: {id}.");
             }
 
-            return new JsonResult(new {Names = licenseNames});
+            var licenseData = new License();
+            var licenses = licenseData.GetAvailableLicenseIDs();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return new JsonResult(new {Licenses = licenses});
+            }
+
+            if (licenses.Contains(id))
+            {
+                return new JsonResult(licenseData.GetLicense(id));
+            }
+            else 
+            {
+                return NotFound(new {result = "error"});
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
