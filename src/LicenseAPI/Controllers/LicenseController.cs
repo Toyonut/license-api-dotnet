@@ -36,7 +36,9 @@ namespace LicenseAPI.Controllers
 
             if (licenses.Contains(id))
             {
-                return new JsonResult(licenseData.GetLicense(id));
+                var license = licenseData.GetLicense(id);
+                _logger.LogInformation(license.LicenseText);
+                return new JsonResult(license);
             }
             else 
             {
