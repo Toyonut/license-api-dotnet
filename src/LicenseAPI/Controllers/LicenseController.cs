@@ -19,11 +19,11 @@ namespace LicenseAPI.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                _logger.LogInformation("Hit the get route on the license controller with no url parameter.");
+                _logger.LogDebug("Hit the get route on the license controller with no url parameter.");
             }
             else
             {
-                _logger.LogInformation($"Hit the get route on the license controller with the ID: {id}.");
+                _logger.LogDebug($"Hit the get route on the license controller with the ID: {id}.");
             }
 
             var licenseData = new License();
@@ -37,7 +37,7 @@ namespace LicenseAPI.Controllers
             if (licenses.Contains(id))
             {
                 var license = licenseData.GetLicense(id);
-                _logger.LogInformation(license.LicenseText);
+                _logger.LogDebug(license.LicenseText);
                 return new JsonResult(license);
             }
             else 
