@@ -38,6 +38,7 @@ namespace LicenseAPI.Controllers
             {
                 var license = licenseData.GetLicense(id);
                 _logger.LogDebug(license.LicenseText);
+                license.LicenseText = license.ReplaceYear();
                 return new JsonResult(license);
             }
             else 

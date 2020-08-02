@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System;
 
 namespace LicenseData
 {
@@ -40,6 +42,13 @@ namespace LicenseData
             return _dbContext.licenses
                     .Where(l => l.ID == id)
                     .Single();
+        }
+
+        public string ReplaceYear ()
+        {
+            string searchPattern = @"\[year\]";
+            string replacementValue = DateTime.Now.Year.ToString();
+            return Regex.Replace(this.LicenseText, searchPattern, replacementValue);
         }
     }
 }
