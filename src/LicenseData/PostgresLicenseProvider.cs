@@ -6,7 +6,7 @@ using System;
 
 namespace LicenseData
 {
-    public class LicenseContext : DbContext
+    public class PostgresLicenseContext : DbContext
     {
         public DbSet<License> licenses { get; set; }
 
@@ -16,21 +16,14 @@ namespace LicenseData
         }
     }
 
-    public class License 
+    public class PostgresLicenseProvider : ILicenseProvider
     {
-        private LicenseContext _dbContext;
-        public License()
+        private PostgresLicenseContext _dbContext;
+        private License _licenseDefinition;
+        public PostgresLicenseProvider()
         {
-            _dbContext = new LicenseContext();
+            _dbContext = new PostgresLicenseContext();
         }
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string LicenseText { get; set; }
-        public string URL { get; set; }
-        public string Description { get; set; }
-        public List<string> Permissions { get; set; }
-        public List<string> Conditions { get; set; }
-        public List<string> Limitations { get; set; }
 
         public List<string> GetAvailableLicenseIDs ()
         {
@@ -39,16 +32,18 @@ namespace LicenseData
 
         public License GetLicense (string id)
         {
-            return _dbContext.licenses
+            _licenseDefinition = _dbContext.licenses
                     .Where(l => l.ID == id)
                     .Single();
+
+            return _licenseDefinition;
         }
 
         public string ReplaceYear ()
         {
             string searchPattern = @"\[year\]";
             string replacementValue = DateTime.Now.Year.ToString();
-            return Regex.Replace(this.LicenseText, searchPattern, replacementValue);
+            return Regex.Replace(_licenseDefinition.LicenseText, searchPattern, replacementValue);
         }
     }
 }
