@@ -9,10 +9,12 @@ namespace LicenseAPI.Controllers
     public class LicenseController : Controller
     {
         private readonly ILogger<LicenseController> _logger;
+        private ILicenseProvider _licenseProvider;
 
-        public LicenseController(ILogger<LicenseController> logger)
+        public LicenseController(ILogger<LicenseController> logger, ILicenseProvider licenseProvider)
         {
             _logger = logger;
+            _licenseProvider = licenseProvider;
         }
 
         public ActionResult Get(string id)
@@ -26,8 +28,7 @@ namespace LicenseAPI.Controllers
                 _logger.LogDebug($"Hit the get route on the license controller with the ID: {id}.");
             }
 
-            var licenseData = new License();
-            var licenses = licenseData.GetAvailableLicenseIDs();
+            var licenses = _licenseProvider.GetAvailableLicenseIDs();
 
             if (string.IsNullOrEmpty(id))
             {
@@ -36,9 +37,9 @@ namespace LicenseAPI.Controllers
 
             if (licenses.Contains(id))
             {
-                var license = licenseData.GetLicense(id);
+                var license = _licenseProvider.GetLicense(id);
                 _logger.LogDebug(license.LicenseText);
-                license.LicenseText = license.ReplaceYear();
+                license.LicenseText = _licenseProvider.ReplaceYear();
                 return new JsonResult(license);
             }
             else 
