@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LicenseData.Migrations
 {
-    [DbContext(typeof(LicenseContext))]
+    [DbContext(typeof(PostgresLicenseContext))]
     [Migration("20200721104215_CreateTable")]
     partial class CreateTable
     {

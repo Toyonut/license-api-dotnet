@@ -8,8 +8,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LicenseData.Migrations
 {
-    [DbContext(typeof(LicenseContext))]
-    partial class LicenseContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PostgresLicenseContext))]
+    partial class PostgresLicenseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

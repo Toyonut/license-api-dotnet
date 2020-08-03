@@ -19,7 +19,7 @@ namespace LicenseLoader
 
             Console.WriteLine(licenses[0].Conditions[0]);
 
-            var dbContext = new LicenseContext();
+            var dbContext = new PostgresLicenseContext();
 
             foreach (var licence in licenses)
             {
