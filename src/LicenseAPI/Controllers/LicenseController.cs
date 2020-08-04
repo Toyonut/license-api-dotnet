@@ -39,7 +39,7 @@ namespace LicenseAPI.Controllers
             {
                 var license = _licenseProvider.GetLicense(id);
                 _logger.LogDebug(license.LicenseText);
-                license.LicenseText = _licenseProvider.ReplaceYear();
+                license.LicenseText = _licenseProvider.ReplaceYear(license.LicenseText);
                 return new JsonResult(license);
             }
             else 

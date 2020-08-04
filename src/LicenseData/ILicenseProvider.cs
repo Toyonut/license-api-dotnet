@@ -6,6 +6,6 @@ namespace LicenseData
     {
         List<string> GetAvailableLicenseIDs();
         License GetLicense(string id);
-        string ReplaceYear();
+        string ReplaceYear(string licenseText);
     }
 }

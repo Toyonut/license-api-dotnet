@@ -19,7 +19,7 @@ namespace LicenseData
     public class PostgresLicenseProvider : ILicenseProvider
     {
         private PostgresLicenseContext _dbContext;
-        private License _licenseDefinition;
+
         public PostgresLicenseProvider()
         {
             _dbContext = new PostgresLicenseContext();
@@ -32,18 +32,16 @@ namespace LicenseData
 
         public License GetLicense (string id)
         {
-            _licenseDefinition = _dbContext.licenses
+            return _dbContext.licenses
                     .Where(l => l.ID == id)
                     .Single();
-
-            return _licenseDefinition;
         }
 
-        public string ReplaceYear ()
+        public string ReplaceYear (string licenseText)
         {
             string searchPattern = @"\[year\]";
             string replacementValue = DateTime.Now.Year.ToString();
-            return Regex.Replace(_licenseDefinition.LicenseText, searchPattern, replacementValue);
+            return Regex.Replace(licenseText, searchPattern, replacementValue);
         }
     }
 }
